@@ -1,30 +1,27 @@
-const {UsersModel} = require("../module/userModule")
+const {professionalModel} = require("../module/professionalModule")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
 
+//ALL PROFESSIONAL DATA
+let getProfessionalData = async (req, res) => {
+  try {
+    let data = await professionalModel.findAll();
+    res.status(200).json({
+      isError: false,
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-//GET ALL DATA OF USERS
-let  getUserData = async (req, res)=>{
+
+//PROFESSIONAL REGISTER
+let professionalRegister = async (req, res)=>{
     try {
-        let data = await UsersModel.findAll()
-        res.status(200).json({
-            isError: false,
-            data
-        })
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-
-// REGISTER BY USERS
-
-let userRegister = async (req, res)=>{
-
-    try {
-        let { username, email, password } = req.body;
-        let data =  await UsersModel.findAll({where:{email}})
+        let {professionalName, email, password}= req.body;
+        let data =  await professionalModel.findAll({where:{email}})
         if(data.length!=0){
             res.send({message: "Email already register"});
             return
@@ -33,7 +30,7 @@ let userRegister = async (req, res)=>{
             if (err) {
                 res.send({ "message": "Error while Hashing Password" });
             } else {
-                let data = await UsersModel.create({ username, email, "password": hashed_pass })
+                let data = await professionalModel.create({ professionalName, email, "password": hashed_pass })
                 res.status(200).json({
                     isError: false,
                     "message": `registration successfull`,
@@ -48,19 +45,17 @@ let userRegister = async (req, res)=>{
 }
 
 
-
-// LOGIN BY USERS
-let userLogin = async (req, res)=>{
+//PROFESSIONAL LOGIN
+let professionalLogin =  async (req, res)=>{
     let { email, password } = req.body;
     try {
-        let check = await UsersModel.findAll({ where : {email}});
+        let check = await professionalModel.findAll({ where : {email}});
         if (check.length == 1) {
             bcrypt.compare(password, check[0].password, async (err, result) => {
                 if (result) {
-                    // Generating Token
-                    var token = jwt.sign({ email }, process.env.secret, { expiresIn: '7d' });
-                    // Sending Response
-                    res.send({ "message": `${check[0].username} is successfully logged in` , "username": check[0].username, "Access_Token": token });
+                    var token = jwt.sign({ email }, process.env.secret, { expiresIn: '5d' });
+                    
+                    res.send({ "message": `${check[0].professionalName} is successfully logged in` , "username": check[0].username, "Access_Token": token });
                 } else {
                     res.send({ "message": "Wrong Credentials" });
                 }
@@ -73,5 +68,4 @@ let userLogin = async (req, res)=>{
     }
 }
 
-
-module.exports = {getUserData, userRegister, userLogin}
+module.exports = {getProfessionalData, professionalRegister, professionalLogin}

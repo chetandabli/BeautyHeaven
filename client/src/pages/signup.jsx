@@ -1,16 +1,16 @@
 import styles from "./loginpage.module.css";
-import Login from "../components/login";
+import Signup from "../components/signup";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 
-function LoginPage() {
+function SignupPage() {
    return <>
    <Navbar/>
         <div className={styles.mainDiv}>
-            <Login />
+            <Signup />
         </div>
         <Footer/>
     </>
 }
 
-export default LoginPage;
+export default SignupPage;

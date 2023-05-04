@@ -1,4 +1,5 @@
 import styles from "./Signup.module.css";
+import { Link } from "react-router-dom";
 
 function Signup () {
     return <form id="signup" className={styles.signupForm}>
@@ -23,7 +24,7 @@ function Signup () {
                 <input type="number" id="num" placeholder="Enter Contact Number" />
                 <input type="password" id="pass" placeholder="Choose a strong password" />
                 <input type="submit" value="SIGNUP" />
-                <p>This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
+                <Link to={"/login"}><button>Login</button></Link>
             </form>
 }
 

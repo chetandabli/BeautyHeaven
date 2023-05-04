@@ -1,4 +1,5 @@
 import styles from "./Login.module.css";
+import { Link } from "react-router-dom";
 
 function Login () {
     return <form id="login" className={styles.loginForm}>
@@ -8,7 +9,7 @@ function Login () {
                 <input id="logpass" type="password" placeholder="Please enter your Password" />
                 <p>This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
                 <div>
-                <p>Forgot Password</p>
+                <Link style={{ fontWeight: "600", textDecoration: "underline" }} to={"/signup"}>Create New Account!</Link>
                 <input type="submit" value="Log In" />
                 </div>
             </form>

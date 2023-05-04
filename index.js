@@ -1,8 +1,7 @@
 const express  = require("express")
-const {seq} = require("./config/connection")
-const {adminRouter} = require("./router/admin")
-const {professionalRouter} = require("./router/professional")
-const {userRouter} = require("./router/userRouter")
+const {seq} = require("./config/db")
+const {professionalRouter} = require("./router/professional.router")
+const {userRouter} = require("./router/user.router")
 
 require("dotenv").config()
 const app = express()
@@ -10,8 +9,6 @@ app.use(express.json())
 
 app.use("/users",userRouter)
 app.use("/professions",professionalRouter)
-app.use("/admin",adminRouter)
-
 
 
 //connected to server

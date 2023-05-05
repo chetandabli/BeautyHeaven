@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Logo from "../assets/navbar_logo.png";
 import "./Footer.module.css"
 
 function Navbar() {
+  const location = useLocation();
   const [username, setUsername] = useState(
     localStorage.getItem("username") || false
   );
@@ -19,6 +20,9 @@ function Navbar() {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
+  const isHome = location.pathname === "/";
+  const isServices = location.pathname === "/services";
 
   return (
     <div
@@ -52,14 +56,14 @@ function Navbar() {
           }}
         >
           <li style={{ marginRight: "30px" }}>
-            <Link to="/" style={{ color: "#372415", cursor: "pointer", textDecoration: "none" }}>
+            <Link to="/" style={{ color: isHome? "#AD9551": "#372415", cursor: "pointer", textDecoration: isHome? "underline" : "none"}}>
               Home
             </Link>
           </li>
           <li style={{ marginRight: "30px" }}>
             <Link
               to="/services"
-              style={{ color: "#372415", cursor: "pointer", textDecoration: "none" }}
+              style={{ color: isServices? "#AD9551": "#372415", cursor: "pointer", textDecoration: isServices? "underline" : "none" }}
             >
               Services
             </Link>
@@ -98,7 +102,7 @@ function Navbar() {
           ) : (
             <li style={{ marginRight: "20px" }}>
               <Link
-                to="login"
+                to="/login"
                 style={{
                   color: "#fff",
                   textDecoration: "none",

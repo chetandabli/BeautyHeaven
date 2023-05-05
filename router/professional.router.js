@@ -5,6 +5,7 @@ const {
   getProfessionalData,
   professionalRegister,
   professionalLogin,
+  beautySlotsBooking
 } = require("../controllers/professional.controller");
 
 //GET ALL DATA OF professional
@@ -15,5 +16,9 @@ professionalRouter.post("/register", professionalRegister);
 
 // LOGIN BY professional
 professionalRouter.post("/login", professionalLogin);
+
+//BEAUTY SLOT BOOKING 
+professionalRouter.use(AuthenicateProfessional)
+professionalRouter.post("/createBeautySlots", beautySlotsBooking);
 
 module.exports = { professionalRouter };

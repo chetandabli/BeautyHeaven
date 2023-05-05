@@ -1,6 +1,9 @@
-const { professionalModel } = require("../module/professionalModule");
+// const { professionalModel } = require("../module/professionalModule");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const {BeautySlot} = require("../models/beauty.slot.model")
+
+
 
 //ALL PROFESSIONAL DATA
 let getProfessionalData = async (req, res) => {
@@ -75,8 +78,26 @@ let professionalLogin = async (req, res) => {
   }
 };
 
+let beautySlotsBooking = async (req, res)=>{
+  try {
+      let token = req.headers.authorization
+      let decoded = jwt.verify(token, process.env.secret)
+      let {beautyType, bookingTime} = req.body
+      let beautyslot = await BeautySlot.create({beautyType, bookingTime, "professionalEmail":decoded.email, "professionalName":decoded.professionalName})
+      res.status(200).json({
+          isError: false,
+          "message": `Add slot successfull`,
+          beautyslot
+      })
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+
 module.exports = {
   getProfessionalData,
   professionalRegister,
   professionalLogin,
+  beautySlotsBooking
 };

@@ -1,7 +1,7 @@
 require("dotenv").config();
 const secretKey = process.env.secret;
 var jwt = require("jsonwebtoken");
-const { professionalModel } = require("../module/professionalModule");
+// const { professionalModel } = require("../module/professionalModule");
 
 async function AuthenicateProfessional(req, res, next) {
   let token = req.headers.authorization;
@@ -17,7 +17,7 @@ async function AuthenicateProfessional(req, res, next) {
         res.send({ message: "Not Authorized" });
       }
     } else {
-      res.send([{ message: "Not " }]);
+      res.send({ message: "Not Authorized" });
     }
   });
 }

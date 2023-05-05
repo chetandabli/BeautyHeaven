@@ -1,4 +1,4 @@
-//HLD OF BEAUTY BOOKING WEBSITE------------------------------------------------------------
+//LLD OF BEAUTY BOOKING WEBSITE------------------------------------------------------------
 //user---city(location)---beauty-service---spa/parlor---professionals---timing---seats--booking--payment---feedback.
 
 //BEAUTY SERVICES----------------------------------------------

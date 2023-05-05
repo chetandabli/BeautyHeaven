@@ -57,7 +57,7 @@ class Customer {
         this.password = password;
         this.gender = gender;
         this.Booking = [];
-        this.feedback = [];
+        this.Feedback = [];
     }
 }
 
@@ -219,7 +219,89 @@ class Feedback {
     id: number;
     CustomerId: Number;
     ProfessionalName: string;
-    
-    
+    review: string;
+    note: string;
+    date: string;
 
+    constructor(
+        id: number,
+        customerId: number,
+        ProfessionalName: string,
+        review: string,
+        note: string,
+        date: string
+
+    ){
+        this.id = id;
+        this.CustomerId = customerId;
+        this.ProfessionalName =ProfessionalName;
+        this.review = review;
+        this.note = note;
+        this.date = date;
+
+    }
+    
+    
 }
+
+class BeautyHeavenParlor {
+    Customer: Customer[];
+    BeautyService: BeautyService[];
+    Professionals: Professionals[];
+    TimingSlots: TimingSlots[];
+    Booking: Booking[];
+    Payment: Payment[];
+    Feedback: Feedback[];
+
+    constructor(
+        Customer: Customer[] = [],
+        BeautyService: BeautyService[] = [],
+        Professionals: Professionals[] = [],
+        TimingSlots: TimingSlots[] = [],
+        Booking: Booking[] = [],
+        Payment: Payment[] = [],
+        Feedback: Feedback[] = [],
+    ) {
+        this.Customer = Customer;
+        this.BeautyService = BeautyService;
+        this.Professionals = Professionals;
+        this.TimingSlots = TimingSlots;
+        this.Booking = Booking;
+        this.Payment = Payment;
+        this.Feedback = Feedback;
+    }
+
+    registerCustomer(
+        first_name: string,
+        last_name: string,
+        email: string,
+        mobile: string,
+        password: string,
+        gender: string
+    ) {
+        const id = this.Customer.length + 1;
+        const newCustomer = new Customer(
+            id,
+            first_name,
+            last_name,
+            email,
+            mobile,
+            password,
+            gender
+        );
+        this.Customer.push(newCustomer);
+        return newCustomer;
+    }
+}
+
+const beautyHeavenParlor = new BeautyHeavenParlor();
+const registerCustomer = beautyHeavenParlor.registerCustomer(
+    "Nihar Ranjan",
+    "Patra",
+    "hero@gmail.com",
+    "99696969",
+    "hero@321",
+    "male"
+);
+
+console.log(registerCustomer);

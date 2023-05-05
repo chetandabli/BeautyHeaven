@@ -56,7 +56,7 @@ let userLogin = async (req, res) => {
       bcrypt.compare(password, check[0].password, async (err, result) => {
         if (result) {
           // Generating Token
-          var token = jwt.sign({ email }, process.env.secret, {
+          var token = jwt.sign({ email:check[0].email, username:check[0].username }, process.env.secret, {
             expiresIn: "7d",
           });
           // Sending Response

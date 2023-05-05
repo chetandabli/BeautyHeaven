@@ -57,7 +57,7 @@ let professionalLogin = async (req, res) => {
     if (check.length == 1) {
       bcrypt.compare(password, check[0].password, async (err, result) => {
         if (result) {
-          var token = jwt.sign({ email }, process.env.secret, {
+          var token = jwt.sign({ email:check[0].email, professionalName:check[0].professionalName }, process.env.secret, {
             expiresIn: "5d",
           });
 

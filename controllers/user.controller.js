@@ -1,4 +1,5 @@
-// const { UsersModel } = require("../module/userModule");
+const { UsersModel } = require("../models/user.model");
+const {BeautySlot} = require("../models/beauty.slot.model")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -15,11 +16,11 @@ let getUserData = async (req, res) => {
   }
 };
 
-// REGISTER BY USERS
 
+// REGISTER BY USERS
 let userRegister = async (req, res) => {
   try {
-    let { username, email, password } = req.body;
+    let { username, phoneNumber, email, password } = req.body;
     let data = await UsersModel.findAll({ where: { email } });
     if (data.length != 0) {
       res.send({ message: "Email already register" });
@@ -31,6 +32,7 @@ let userRegister = async (req, res) => {
       } else {
         let data = await UsersModel.create({
           username,
+          phoneNumber,
           email,
           password: hashed_pass,
         });
@@ -46,6 +48,7 @@ let userRegister = async (req, res) => {
     console.log(error);
   }
 };
+
 
 // LOGIN BY USERS
 let userLogin = async (req, res) => {
@@ -73,8 +76,54 @@ let userLogin = async (req, res) => {
       res.send({ message: "Wrong Credentials" });
     }
   } catch (error) {
-    res.send([{ message: "Something Went Wrong" }]);
+    res.send({ message: "Something Went Wrong" });
   }
 };
 
-module.exports = { getUserData, userRegister, userLogin };
+
+//USERS SEE THE ALL AVAILABLE SLOTS
+let availableSlots = async (req, res)=>{
+  try {
+      // let token = req.headers.authorization
+      // let decoded = jwt.verify(token, process.env.secret)
+      let beautyslot = await BeautySlot.findAll({where:{
+        status : false
+      }})
+      res.status(200).json({
+          isError: false,
+          "message": `AVAILABLE SLOTS`,
+          beautyslot
+      })
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+//SLOT BOOKING BY USER
+let beautySlotsBooking = async (req, res)=>{
+  try {
+      let token = req.headers.authorization
+      let decoded = jwt.verify(token, process.env.secret)
+      let username = decoded.username
+      let email = decoded.email
+      let id = req.params.id 
+      let { beautyType, bookingTime, status, progress, professionalName, professionalEmail, professionalID, userName, userEmail, userID} = await BeautySlot.findAll({where: {id}})
+      let beautyslot = await BeautySlot.upsert({
+        id,
+        beautyType,
+        bookingTime,
+        status ,
+        userName : username,
+        userEmail : email
+      })
+      res.status(200).json({
+          isError: false,
+          "message": `Add slot successfull`,
+          beautyslot
+      })
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+module.exports = { getUserData, userRegister, userLogin, availableSlots, beautySlotsBooking };

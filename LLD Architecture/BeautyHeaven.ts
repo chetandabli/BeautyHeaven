@@ -292,6 +292,26 @@ class BeautyHeavenParlor {
         this.Customer.push(newCustomer);
         return newCustomer;
     }
+
+    NewBeautyService(
+        BeautyServiceName: string,
+        description: string, 
+        duration: number,
+        city: string,
+        address: string,
+        ) {
+        let id = this.BeautyService.length + 1;
+        const newBeautyService = new BeautyService(
+            id, 
+            BeautyServiceName, 
+            description, 
+            duration,
+            city,
+            address
+        );
+        this.BeautyService.push(newBeautyService);
+        return newBeautyService;
+    }
 }
 
 const beautyHeavenParlor = new BeautyHeavenParlor();

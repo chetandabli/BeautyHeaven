@@ -6,7 +6,8 @@ const {
   professionalRegister,
   professionalLogin,
   beautySlotsOpen,
-  bookedSlots
+  bookedSlots,
+  checkRequestUsers
 } = require("../controllers/professional.controller");
 
 //GET ALL DATA OF professional
@@ -22,11 +23,16 @@ professionalRouter.post("/login", professionalLogin);
 //AUTHENTICATION OF PROFESSIONAL
 professionalRouter.use(AuthenicateProfessional)
 
-//BEAUTY SLOT BOOKING 
+//OPEN SLOT BOOKING 
 professionalRouter.post("/createBeautySlots", beautySlotsOpen);
 
 
 //BOOKED SLOTS OF USERS
-professionalRouter.get("bookedSlots", bookedSlots)
+professionalRouter.get("/bookedSlots", bookedSlots)
+
+//ETHEIR ACCEPT OR REJECT THE REQUEST
+professionalRouter.get("/checkRequest/:status/:id", checkRequestUsers)
+
+
 
 module.exports = { professionalRouter };

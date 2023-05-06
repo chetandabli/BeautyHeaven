@@ -1,4 +1,4 @@
-//HLD OF BEAUTY BOOKING WEBSITE------------------------------------------------------------
+//LLD OF BEAUTY BOOKING WEBSITE------------------------------------------------------------
 //user---city(location)---beauty-service---spa/parlor---professionals---timing---seats--booking--payment---feedback.
 
 //BEAUTY SERVICES----------------------------------------------
@@ -291,6 +291,26 @@ class BeautyHeavenParlor {
         );
         this.Customer.push(newCustomer);
         return newCustomer;
+    }
+
+    NewBeautyService(
+        BeautyServiceName: string,
+        description: string, 
+        duration: number,
+        city: string,
+        address: string,
+        ) {
+        let id = this.BeautyService.length + 1;
+        const newBeautyService = new BeautyService(
+            id, 
+            BeautyServiceName, 
+            description, 
+            duration,
+            city,
+            address
+        );
+        this.BeautyService.push(newBeautyService);
+        return newBeautyService;
     }
 }
 

@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const { seq } = require("../config/db");
+const { seq } = require("../config/connection");
 
 const BeautySlot = seq.define("beautySlots", {
     beautyType: {type: Sequelize.STRING,allowNull: false},

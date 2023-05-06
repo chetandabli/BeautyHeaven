@@ -6,7 +6,8 @@ const {
   userRegister,
   userLogin,
   availableSlots,
-  beautySlotsBooking
+  beautySlotsBooking,
+  particularSlots
 } = require("../controllers/user.controller");
 
 //GET ALL DATA OF USERS
@@ -31,6 +32,10 @@ userRouter.get("/availableSlots", availableSlots)
 
 //BOOKING SLOTS BY USERS
 userRouter.put("/bookingSlots/:id", beautySlotsBooking)
+
+
+//PARTICULAR USERS SLOTS
+userRouter.get("/particularSlots", particularSlots)
 
 
 module.exports = { userRouter };

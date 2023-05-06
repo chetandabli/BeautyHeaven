@@ -18,6 +18,7 @@ let getProfessionalData = async (req, res) => {
   }
 };
 
+
 //PROFESSIONAL REGISTER
 let professionalRegister = async (req, res) => {
   try {
@@ -78,7 +79,7 @@ let beautySlotsOpen = async (req, res)=>{
       let beautyslot = await BeautySlot.create({beautyType, bookingTime, "professionalEmail":decoded.email, "professionalName":decoded.professionalName})
       res.status(200).json({
           isError: false,
-          "message": `Add slot successfull`,
+          "message": `Added slot successfull`,
           beautyslot
       })
   } catch (error) {
@@ -91,9 +92,10 @@ let bookedSlots = async (req, res)=>{
   try {
       let token = req.headers.authorization
       let decoded = jwt.verify(token, process.env.secret)
+      let {email, professionalName, iat, exp} = decoded
       let beautyslot = await BeautySlot.findAll({where:{
         status : true,
-        professionalEmail : decoded.email
+        professionalEmail : email
       }})
       res.status(200).json({
           isError: false,
@@ -106,8 +108,76 @@ let bookedSlots = async (req, res)=>{
 }
 
 
-
-
+//PROFESSIONAL EITHER ACCEPT REQUEST OR REJECT
+let checkRequestUsers = async (req, res)=>{
+  try {
+      let token = req.headers.authorization
+      let decoded = jwt.verify(token, process.env.secret);
+      let beautyId = req.params.id;
+      let progressStatus = req.params.status
+      let {
+        id,
+        beautyType,
+        bookingTime,
+        status,
+        progress,
+        professionalName,
+        professionalEmail,
+        professionalID,
+        userName,
+        userEmail,
+        userID,
+        createdAt,
+        updatedAt,
+      } = await BeautySlot.findOne({ where: { id: beautyId } });
+      if(progressStatus==="true"){
+        let beautyslot = await BeautySlot.upsert({
+          id,
+          beautyType,
+          bookingTime,
+          status: true,
+          progress : true,
+          professionalName,
+          professionalEmail,
+          professionalID,
+          userName,
+          userEmail,
+          userID,
+          createdAt,
+          updatedAt,
+        });
+        res.status(200).json({
+          isError: false,
+          "message": `Get All slots Booked By Users`,
+          beautyslot,
+          progress
+      })
+      }else{
+        let beautyslot = await BeautySlot.upsert({
+          id,
+          beautyType,
+          bookingTime,
+          status: false,
+          progress : false,
+          professionalName,
+          professionalEmail,
+          professionalID,
+          userName,
+          userEmail,
+          userID,
+          createdAt,
+          updatedAt,
+        });
+        res.status(200).json({
+          isError: false,
+          "message": `Get All slots Booked By Users`,
+          beautyslot,
+      })
+      }   
+  } catch (error) {
+      console.log(error)
+  }
+}
 
 
 
@@ -116,5 +186,6 @@ module.exports = {
   professionalRegister,
   professionalLogin,
   beautySlotsOpen,
-  bookedSlots
+  bookedSlots,
+  checkRequestUsers
 };

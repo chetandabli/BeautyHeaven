@@ -1,4 +1,4 @@
-// const { professionalModel } = require("../module/professionalModule");
+const { professionalModel } = require("../models/professional.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const {BeautySlot} = require("../models/beauty.slot.model")
@@ -21,64 +21,56 @@ let getProfessionalData = async (req, res) => {
 //PROFESSIONAL REGISTER
 let professionalRegister = async (req, res) => {
   try {
-    let { professionalName, email, password } = req.body;
-    let data = await professionalModel.findAll({ where: { email } });
-    if (data.length != 0) {
-      res.send({ message: "Email already register" });
-      return;
+    let {professionalName, email, phoneNumber, password}= req.body;
+    let data =  await professionalModel.findAll({where:{email}})
+    if(data.length!=0){
+        res.send({message: "Email already register"});
+        return
     }
     bcrypt.hash(password, 5, async (err, hashed_pass) => {
-      if (err) {
-        res.send({ message: "Error while Hashing Password" });
-      } else {
-        let data = await professionalModel.create({
-          professionalName,
-          email,
-          password: hashed_pass,
-        });
-        res.status(200).json({
-          isError: false,
-          message: `registration successfull`,
-          data,
-        });
-      }
+        if (err) {
+            res.send({ "message": "Error while Hashing Password" });
+        } else {
+            let data = await professionalModel.create({ professionalName, email, phoneNumber, "password": hashed_pass })
+            res.status(200).json({
+                isError: false,
+                "message": `registration successfull`,
+                data
+            })
+        }
     });
-  } catch (error) {
+} catch (error) {
     // res.send([{ "message": "Error while Registering" }]);
-    console.log(error);
-  }
+    console.log(error)
+}
 };
 
 //PROFESSIONAL LOGIN
 let professionalLogin = async (req, res) => {
   let { email, password } = req.body;
-  try {
-    let check = await professionalModel.findAll({ where: { email } });
-    if (check.length == 1) {
-      bcrypt.compare(password, check[0].password, async (err, result) => {
-        if (result) {
-          var token = jwt.sign({ email:check[0].email, professionalName:check[0].professionalName }, process.env.secret, {
-            expiresIn: "5d",
-          });
-
-          res.send({
-            message: `${check[0].professionalName} is successfully logged in`,
-            username: check[0].username,
-            Access_Token: token,
-          });
+    try {
+        let check = await professionalModel.findAll({ where : {email}});
+        if (check.length == 1) {
+            bcrypt.compare(password, check[0].password, async (err, result) => {
+                if (result) {
+                    var token = jwt.sign({email:check[0].email, professionalName:check[0].professionalName}, process.env.secret, { expiresIn: '5d' });
+                    
+                    res.send({ "message": `${check[0].professionalName} is successfully logged in` , "username": check[0].professionalName, "Access_Token": token });
+                } else {
+                    res.send({ "message": "Wrong Credentials" });
+                }
+            });
         } else {
-          res.send({ message: "Wrong Credentials" });
+            res.send({ "message": "Wrong Credentials" });
         }
-      });
-    } else {
-      res.send({ message: "Wrong Credentials" });
+    } catch (error) {
+        res.send({ "message": "Something Went Wrong" });
     }
-  } catch (error) {
-    res.send([{ message: "Something Went Wrong" }]);
-  }
 };
 
-let beautySlotsBooking = async (req, res)=>{
+
+//OPEN SLOTS BY PROFESSIONAL
+let beautySlotsOpen = async (req, res)=>{
   try {
       let token = req.headers.authorization
       let decoded = jwt.verify(token, process.env.secret)
@@ -94,10 +86,35 @@ let beautySlotsBooking = async (req, res)=>{
   }
 }
 
+//BOOKED SLOTS BY USERS
+let bookedSlots = async (req, res)=>{
+  try {
+      let token = req.headers.authorization
+      let decoded = jwt.verify(token, process.env.secret)
+      let beautyslot = await BeautySlot.findAll({where:{
+        status : true,
+        professionalEmail : decoded.email
+      }})
+      res.status(200).json({
+          isError: false,
+          "message": `Get All slots Booked By Users`,
+          beautyslot
+      })
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+
+
+
+
+
 
 module.exports = {
   getProfessionalData,
   professionalRegister,
   professionalLogin,
-  beautySlotsBooking
+  beautySlotsOpen,
+  bookedSlots
 };

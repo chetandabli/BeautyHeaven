@@ -1,5 +1,5 @@
 const { UsersModel } = require("../models/user.model");
-const {BeautySlot} = require("../models/beauty.slot.model")
+const { BeautySlot } = require("../models/beauty.slot.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -15,7 +15,6 @@ let getUserData = async (req, res) => {
     console.log(error);
   }
 };
-
 
 // REGISTER BY USERS
 let userRegister = async (req, res) => {
@@ -49,7 +48,6 @@ let userRegister = async (req, res) => {
   }
 };
 
-
 // LOGIN BY USERS
 let userLogin = async (req, res) => {
   let { email, password } = req.body;
@@ -59,9 +57,13 @@ let userLogin = async (req, res) => {
       bcrypt.compare(password, check[0].password, async (err, result) => {
         if (result) {
           // Generating Token
-          var token = jwt.sign({ email:check[0].email, username:check[0].username }, process.env.secret, {
-            expiresIn: "7d",
-          });
+          var token = jwt.sign(
+            { email: check[0].email, username: check[0].username },
+            process.env.secret,
+            {
+              expiresIn: "7d",
+            }
+          );
           // Sending Response
           res.send({
             message: `${check[0].username} is successfully logged in`,
@@ -80,50 +82,104 @@ let userLogin = async (req, res) => {
   }
 };
 
-
 //USERS SEE THE ALL AVAILABLE SLOTS
-let availableSlots = async (req, res)=>{
+let availableSlots = async (req, res) => {
   try {
-      // let token = req.headers.authorization
-      // let decoded = jwt.verify(token, process.env.secret)
-      let beautyslot = await BeautySlot.findAll({where:{
-        status : false
-      }})
-      res.status(200).json({
-          isError: false,
-          "message": `AVAILABLE SLOTS`,
-          beautyslot
-      })
+    // let token = req.headers.authorization
+    // let decoded = jwt.verify(token, process.env.secret)
+    let beautyslot = await BeautySlot.findAll({
+      where: {
+        status: false,
+      },
+    });
+    res.status(200).json({
+      isError: false,
+      message: `AVAILABLE SLOTS`,
+      beautyslot,
+    });
   } catch (error) {
-      console.log(error)
+    console.log(error);
   }
-}
+};
 
 //SLOT BOOKING BY USER
-let beautySlotsBooking = async (req, res)=>{
+let beautySlotsBooking = async (req, res) => {
   try {
-      let token = req.headers.authorization
-      let decoded = jwt.verify(token, process.env.secret)
-      let username = decoded.username
-      let email = decoded.email
-      let id = req.params.id 
-      let { beautyType, bookingTime, status, progress, professionalName, professionalEmail, professionalID, userName, userEmail, userID} = await BeautySlot.findAll({where: {id}})
-      let beautyslot = await BeautySlot.upsert({
-        id,
-        beautyType,
-        bookingTime,
-        status ,
-        userName : username,
-        userEmail : email
-      })
-      res.status(200).json({
-          isError: false,
-          "message": `Add slot successfull`,
-          beautyslot
-      })
+    let token = req.headers.authorization;
+    let decoded = jwt.verify(token, process.env.secret);
+    let { username, email } = decoded;
+    let beautyId = req.params.id;
+    let {
+      id,
+      beautyType,
+      bookingTime,
+      status,
+      progress,
+      professionalName,
+      professionalEmail,
+      professionalID,
+      userName,
+      userEmail,
+      userID,
+      createdAt,
+      updatedAt,
+    } = await BeautySlot.findOne({ where: { id: beautyId } });
+    let beautyslot = await BeautySlot.upsert({
+      id,
+      beautyType,
+      bookingTime,
+      status: true,
+      progress,
+      professionalName,
+      professionalEmail,
+      professionalID,
+      userName: username,
+      userEmail: email,
+      userID,
+      createdAt,
+      updatedAt,
+    });
+    res.status(200).json({
+      isError: false,
+      message: `Add slot successfull`,
+      beautyslot,
+    });
   } catch (error) {
-      console.log(error)
+    console.log(error);
   }
-}
+};
 
-module.exports = { getUserData, userRegister, userLogin, availableSlots, beautySlotsBooking };
+
+//GET PATICULAR USER BOOKING SLOTS
+let particularSlots = async (req, res) => {
+  try {
+    let token = req.headers.authorization
+    let decoded = jwt.verify(token, process.env.secret)
+    let { username, email } = decoded;
+    let beautyslot = await BeautySlot.findAll({
+      where: {
+        status: true,
+        userEmail : email
+      },
+    });
+    res.status(200).json({
+      isError: false,
+      message: `AVAILABLE SLOTS`,
+      beautyslot,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+
+module.exports = {
+  getUserData,
+  userRegister,
+  userLogin,
+  availableSlots,
+  beautySlotsBooking,
+  particularSlots
+};

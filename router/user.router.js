@@ -1,6 +1,11 @@
 const express = require("express");
 const userRouter = express.Router();
+
+const {client} = require('../config/db')
+
+
 const {AuthenicateUser} = require("../middleware/userMiddleware")
+
 const {
   getUserData,
   userRegister,
@@ -22,6 +27,19 @@ userRouter.post("/register", userRegister);
 userRouter.post("/login", userLogin);
 
 
+userRouter.get("/logout", async(req,res) => {
+  let token = req.headers.authorization;
+  try{
+     await client.SADD('blackToken',token);
+     res.send("logged out Successfully");
+  }catch(err){
+    res.sendStatus(400)
+
+  }
+}
+);
+
+
 //AUTHENTICATION OF USER
 userRouter.use(AuthenicateUser)
 
@@ -32,10 +50,6 @@ userRouter.get("/availableSlots", availableSlots)
 
 //BOOKING SLOTS BY USERS
 userRouter.put("/bookingSlots/:id", beautySlotsBooking)
-
-
-//PARTICULAR USERS SLOTS
-userRouter.get("/particularSlots", particularSlots)
 
 
 module.exports = { userRouter };

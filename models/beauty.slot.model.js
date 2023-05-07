@@ -1,6 +1,10 @@
 const { Sequelize, DataTypes } = require("sequelize");
+
+
 const { seq } = require("../config/db");
 
+
+const {seq} = require('../config/db');
 const BeautySlot = seq.define("beautySlots", {
     beautyType: {type: Sequelize.STRING,allowNull: false},
     bookingTime: {type: Sequelize.STRING,allowNull: false},

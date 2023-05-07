@@ -26,8 +26,7 @@
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.2.4",
     "nodemon": "^2.0.22",
-    "react-popup": "^0.11.0",
-    "reactjs-popup": "^2.0.5",
+    "redis": "^4.6.6",
     "sequelize": "^6.31.1"
   }
 }

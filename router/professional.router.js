@@ -20,19 +20,14 @@ professionalRouter.post("/register", professionalRegister);
 professionalRouter.post("/login", professionalLogin);
 
 
-//AUTHENTICATION OF PROFESSIONAL
+//BEAUTY SLOT BOOKING 
 professionalRouter.use(AuthenicateProfessional)
 
-//OPEN SLOT BOOKING 
+//BEAUTY SLOT BOOKING 
 professionalRouter.post("/createBeautySlots", beautySlotsOpen);
 
 
 //BOOKED SLOTS OF USERS
-professionalRouter.get("/bookedSlots", bookedSlots)
-
-//ETHEIR ACCEPT OR REJECT THE REQUEST
-professionalRouter.get("/checkRequest/:status/:id", checkRequestUsers)
-
-
+professionalRouter.get("bookedSlots", bookedSlots)
 
 module.exports = { professionalRouter };

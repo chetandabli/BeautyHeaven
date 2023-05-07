@@ -1,11 +1,12 @@
 const express = require("express");
-
+const {AuthenicateProfessional} = require("../middleware/professionalMiddleware")
 const professionalRouter = express.Router();
 const {
   getProfessionalData,
   professionalRegister,
   professionalLogin,
-  beautySlotsBooking
+  beautySlotsOpen,
+  bookedSlots
 } = require("../controllers/professional.controller");
 
 //GET ALL DATA OF professional
@@ -19,21 +20,7 @@ professionalRouter.post("/login", professionalLogin);
 
 
 //BEAUTY SLOT BOOKING 
-
 professionalRouter.use(AuthenicateProfessional)
 professionalRouter.post("/createBeautySlots", beautySlotsBooking);
-
-
-professionalRouter.get("/logout", async(req,res) => {
-  let token = req.headers.authorization;
-  try{
-     await client.SADD('blackToken',token);
-     res.send("logged out Successfully");
-  }catch(err){
-    res.sendStatus(400)
-
-  }
-}
-);
 
 module.exports = { professionalRouter };

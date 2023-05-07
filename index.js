@@ -2,9 +2,11 @@ const express  = require("express")
 const {seq} = require("./config/db")
 const {professionalRouter} = require("./router/professional.router")
 const {userRouter} = require("./router/user.router")
+const cors = require('cors')
 
 require("dotenv").config()
 const app = express()
+app.use(cors())
 app.use(express.json())
 
 app.use("/users",userRouter)

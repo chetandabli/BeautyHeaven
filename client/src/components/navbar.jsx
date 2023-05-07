@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Logo from "../assets/navbar_logo.png";
 import "./Footer.module.css"
+import CSS from "./Navbar.module.css"
 
 function Navbar() {
   const location = useLocation();
@@ -23,110 +24,57 @@ function Navbar() {
 
   const isHome = location.pathname === "/";
   const isServices = location.pathname === "/services";
+  const isDashboard = location.pathname === "/dashboard";
 
   return (
-    <div
-      style={{
-        display: "flex",
-        backgroundColor: "#EAE3DB",
-        justifyContent: "space-between",
-        height: "60px",
-        width: "100%",
-        position: "fixed",
-        padding: "5px 0px"
-      }}
-    >
+    <div className={CSS["navbar-container"]}>
       <div>
         <Link to="/">
-          <img src={Logo} alt="beauty heaven" style={{ cursor: "pointer", height: "100%", marginLeft: "20px"}} />
+          <img src={Logo} alt="beauty heaven" className={CSS.logo} />
         </Link>
       </div>
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-      }}>
-        <ul
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
-          }}
-        >
-          <li style={{ marginRight: "30px" }}>
-            <Link to="/" style={{ color: isHome? "#AD9551": "#372415", cursor: "pointer", textDecoration: isHome? "underline" : "none"}}>
+      <div className={CSS["nav-links"]}>
+        <ul>
+          <li>
+            <Link to="/" className={isHome? CSS["active-link"] : ""}>
               Home
             </Link>
           </li>
-          <li style={{ marginRight: "30px" }}>
-            <Link
-              to="/services"
-              style={{ color: isServices? "#AD9551": "#372415", cursor: "pointer", textDecoration: isServices? "underline" : "none" }}
-            >
+          <li>
+            <Link to="/services" className={isServices? CSS["active-link"] : ""}>
               Services
             </Link>
           </li>
           {username ? (
             <>
-              <li style={{ marginRight: "30px" }}>
-                <Link
-                  to="/dashboard"
-                  style={{ color: "#372415", cursor: "pointer" , textDecoration: "none"}}
-                >
-                {username}
+              <li>
+                <Link to="/dashboard" className={isDashboard? CSS["active-link"] : ""}>
+                  {username}
                 </Link>
               </li>
-              <li style={{
-                marginRight: "20px"
-              }}>
+              <li>
                 <button
                   onClick={() => {
                     localStorage.removeItem("username");
                     setUsername(false);
                   }}
-                  style={{
-                    backgroundColor: "#AD9551",
-                    color: "#fff",
-                    border: "none",
-                    padding: "10px 20px",
-                    cursor: "pointer",
-                    borderRadius: "5px"
-                  }}
+                  className={CSS["login-btn"]}
                 >
                   Logout
                 </button>
               </li>
             </>
           ) : (
-            <li style={{ marginRight: "20px" }}>
-              <Link
-                to="/login"
-                style={{
-                  color: "#fff",
-                  textDecoration: "none",
-                  cursor: "pointer",
-                }}
-              >
-                <button
-                  style={{
-                    backgroundColor: "#AD9551",
-                    color: "#fff",
-                    border: "none",
-                    padding: "10px 20px",
-                    cursor: "pointer",
-                    borderRadius: "5px"
-                  }}
-                >
-                  Login
-                </button>
+            <li>
+              <Link to="/login">
+                <button className={CSS["login-btn"]}>Login</button>
               </Link>
             </li>
           )}
         </ul>
       </div>
     </div>
+    
   );
 }
 

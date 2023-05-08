@@ -66,7 +66,7 @@ function Login () {
                 <input id="logpass" type="password" value={passData} onChange={(e) => setPassData(e.target.value)} placeholder="Please enter your Password" />
                 <p>This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
                 <div>
-                <Link style={{ fontWeight: "600", textDecoration: "underline" }} to={"/signup"}><p>Create New Account!</p></Link>
+                <Link to={"/signup"}><p style={{ fontWeight: "600", textDecoration: "underline" }}>Create New Account!</p></Link>
                 <input type="submit" value="Log In" />
                 </div>
             </form>

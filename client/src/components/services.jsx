@@ -5,14 +5,14 @@ import Swal from "sweetalert2";
 
 function Services() {
   const [slotData, setSlotData] = useState([]);
+  const [i, setI] = useState(0);
   let navigate = useNavigate();
   useEffect(() => {
     async function fetchSlotData() {
       let data = await fetch("http://localhost:5000/users/availableSlots", {
         method: "GET",
         headers: {
-          authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imhya3UwMDJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJjaGV0YW5kYWJsaSIsImlhdCI6MTY4MzM4OTgzMiwiZXhwIjoxNjgzOTk0NjMyfQ.7vHAeAF3xMiehbgNCGGExEvk09QTVYK6RCRP4WPZpoc",
+          authorization: localStorage.getItem("token"),
         },
       });
       data = await data.json();
@@ -25,22 +25,17 @@ function Services() {
     }
 
     fetchSlotData();
-  }, []);
+  }, [i]);
 
   const bookSlot = async (id) => {
     let x = await fetch(`http://localhost:5000/users/bookingSlots/${id}`, {
       method: "PUT",
       headers: {
-        authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imhya3UwMDJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJjaGV0YW5kYWJsaSIsImlhdCI6MTY4MzM4OTgzMiwiZXhwIjoxNjgzOTk0NjMyfQ.7vHAeAF3xMiehbgNCGGExEvk09QTVYK6RCRP4WPZpoc",
+        authorization: localStorage.getItem("token"),
       },
     });
     x = await x.json();
-    console.log(x.message);
-    console.log(x);
-    if (x.message === "Add slot successfull") {
-      navigate("/dashboard");
-    }
+    return x
   };
   return (
     <>
@@ -94,13 +89,25 @@ function Services() {
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
                     confirmButtonText: "Yes, book it!",
-                  }).then((result) => {
+                  }).then( async (result) => {
                     if (result.isConfirmed) {
-                      Swal.fire(
+                      let x = await bookSlot(el.id)
+                      if(x.message === "Add slot successfull"){
+                        Swal.fire(
                         "Booked!",
                         "Your slot has been booked and waiting for confirmation!",
                         "success"
-                      );
+                      )
+                      navigate("/dashboard")
+                      }else{
+                        Swal.fire(
+                        "Booking failed!",
+                        "Your slot is not booked and please try again!",
+                        "error"
+                      )
+                      setI(i)
+                      }
+                      
                     }
                   });
                 }}

@@ -4,7 +4,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 function Login () {
-    const baseURL = "https://localhost:5000";
+    const baseURL = "http://localhost:5000";
     const [emailData,setEmailData] = useState("");
     const [passData,setPassData] = useState("");
     const navigate = useNavigate();
@@ -33,11 +33,13 @@ function Login () {
                     username : data.username,
                     token : data.Access_Token
                 }
-                localStorage.setItem("userDetails",JSON.stringify(userDetails));
+                localStorage.setItem("username",userDetails.username);
+                localStorage.setItem("token",userDetails.token);
                 alert("Login Success");
                 navigate("/services");
             }
             else{
+                console.log(data)
                 alert("Invalid Credentials !!");
             }
         })

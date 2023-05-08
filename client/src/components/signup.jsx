@@ -4,7 +4,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 function Signup () {
-    const baseURL = "https://localhost:5000";
+    const baseURL = "http://localhost:5000";
     const [nameData,setNameData] = useState("");
     const [emailData, setEmailData] = useState("");
     const [numData,setNumData] = useState("");

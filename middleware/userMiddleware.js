@@ -10,8 +10,10 @@ const { UsersModel } = require("../models/user.model");
 
 async function AuthenicateUser(req, res, next) {
   let token = req.headers.authorization;
-  let isfound = await client.SISMEMBER('blackToken',token)
+  // let isfound = await client.SISMEMBER('blackToken',token)
+  let isfound = false
   if(isfound){
+    console.log(isfound)
     res.send({ message: "Not Authorized" });
   }else{
     jwt.verify(token, secretKey, async (err, decoded) => {
@@ -25,7 +27,7 @@ async function AuthenicateUser(req, res, next) {
           res.send({ message: "Not Authorized" });
         }
       } else {
-        res.send([{ message: "Not Authorized" }]);
+        res.send([{ message: "Not Authorized!" }]);
       }
     });
   }

@@ -45,3 +45,33 @@
     margin-top: 40px;
     margin-bottom: 40px;
 }
+
+/* media queries for responsiveness */
+
+@media screen and (max-width: 768px) {
+    .signupForm>div{
+        display: block;
+    }
+    .signupForm>input{
+        padding: 5px;
+    }
+    .signupForm p,
+    .signupForm h4{
+        padding: 0px;
+        margin: 8px;
+    }
+  }
+  
+@media screen and (max-width: 480px) {
+    .signupForm>div{
+        display: block;
+    }
+    .signupForm>input{
+        padding: 5px;
+    }
+    .signupForm p,
+    .signupForm h4{
+        padding: 0px;
+        margin: 7px;
+    }
+  }

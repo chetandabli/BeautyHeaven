@@ -5,6 +5,7 @@ import LoginPage from "../pages/login";
 import SignupPage from "../pages/signup";
 import InvalidePage from "../pages/invalide";
 import ServicesPage from "../pages/services";
+import DashboardPage from "../pages/dashboard";
 
 export default function AllRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AllRoutes() {
         <Route path="/login" element={<LoginPage/>}></Route>
         <Route path="/signup" element={<SignupPage />}></Route>
         <Route path="/services" element={<ServicesPage />}></Route>
+        <Route path="/dashboard" element={<DashboardPage />}></Route>
         <Route path="*" element={<InvalidePage />} />
       </Routes>
     </div>

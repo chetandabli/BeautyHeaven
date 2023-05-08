@@ -1,0 +1,65 @@
+.main{
+    display: flex;
+    padding-top: 80px;
+    width: 95%;
+    margin: auto;
+}
+
+.mainContainer{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 10px;
+    row-gap: 20px;
+    width: 78%;
+    margin: auto;
+    padding: 50px 0;
+    min-height: 80vh;
+}
+
+.card{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    height: fit-content;
+}
+
+.title{
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.professionalName{
+    margin-left: 10px;
+}
+
+.time{
+    margin-left: 10px; 
+}
+
+/* media css */
+@media only screen and (max-width: 768px) {
+    .mainContainer {
+      grid-template-columns: repeat(2, 1fr);
+      width: 90%;
+      padding: 30px 0;
+    }
+    .main{
+        display: block;
+    }
+    .main>:first-child{
+        text-align: center;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .mainContainer {
+      grid-template-columns: 1fr;
+      width: 95%;
+      padding: 20px 0;
+    }
+    .main{
+        display: block;
+    }
+    .main>:first-child{
+        text-align: center;
+    }
+  }
+  

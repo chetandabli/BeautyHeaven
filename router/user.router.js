@@ -51,5 +51,8 @@ userRouter.get("/availableSlots", availableSlots)
 //BOOKING SLOTS BY USERS
 userRouter.put("/bookingSlots/:id", beautySlotsBooking)
 
+//BOOKED SLOTS BY USERS
+userRouter.get("/particularslots", particularSlots)
+
 
 module.exports = { userRouter };

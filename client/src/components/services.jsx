@@ -3,6 +3,7 @@ import CSS from "./Services.module.css";
 import {
   useNavigate
 } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 function Services() {
   const [slotData, setSlotData] = useState([]);
@@ -16,7 +17,11 @@ function Services() {
         },
       });
       data = await data.json();
-      console.log(data.beautyslot)
+      console.log(data)
+
+      if(data.message === "Not Authorized"){
+        navigate("/login")
+      }
       setSlotData(data.beautyslot)
     }
 
@@ -46,7 +51,23 @@ if(x.message === "Add slot successfull"){
           return (
             <div className={CSS.card} key={el.id} style={{borderTop: "7px solid #AD9551"}}><p className={CSS.title}>{el.beautyType}</p><p className={CSS.professionalName} style={{color: "rgb(133, 136, 138)"}}>{el.professionalName}</p><p className={CSS.time} style={{color: "blue"}}>{el.bookingTime}</p><hr style={{color: "rgb(237, 237, 237)"}}></hr>
             <button style={{backgroundColor: "#AD9551", border: "none", padding: "5px 15px", cursor: "pointer", marginLeft: "10px", marginBottom: "10px"}} onClick={()=>{
-              bookSlot(el.id)
+              Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able cancel this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, book it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Booked!',
+      'Your slot has been booked and waiting for confirmation!',
+      'success'
+    )
+  }
+})
             }}>Book</button>
             </div>
           )

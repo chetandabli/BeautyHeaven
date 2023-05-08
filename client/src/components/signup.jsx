@@ -71,7 +71,7 @@ function Signup () {
                 <input type="number" id="num" value={numData} onChange={(e) => setNumData(e.target.value)} placeholder="Enter Contact Number" />
                 <input type="password" id="pass" value={passData} onChange={(e) => setPassData(e.target.value)} placeholder="Choose a strong password" />
                 <input type="submit" value="SIGNUP" />
-                <Link to={"/login"}><button>Login</button></Link>
+                <Link to={"/login"}><p style={{ fontWeight: "600", textAlign: "center" }}>Already a user ? <span style={{ fontWeight: "600", textDecoration: "underline" }}>Login here</span></p></Link>
             </form>
 }
 

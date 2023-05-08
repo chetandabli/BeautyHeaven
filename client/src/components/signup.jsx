@@ -1,6 +1,7 @@
 import styles from "./Signup.module.css";
 import { Link } from "react-router-dom";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 function Signup () {
     const baseURL = "https://localhost:5000";
@@ -8,6 +9,7 @@ function Signup () {
     const [emailData, setEmailData] = useState("");
     const [numData,setNumData] = useState("");
     const [passData,setPassData] = useState("");
+    const navigate = useNavigate();
 
     function formSubmit(e) {
         e.preventDefault();
@@ -31,7 +33,13 @@ function Signup () {
              })
              .then((data) => {
                  console.log(data);
-                 alert(data.message);
+                 if(data.message === "registration successfull"){
+                    alert(data.message);
+                    navigate("/login");
+                 }
+                 else{
+                    alert("Something went wrong, Registration Failed");
+                 }
              })
              .catch((err) => {
                 console.log(err);
@@ -63,7 +71,7 @@ function Signup () {
                 <input type="number" id="num" value={numData} onChange={(e) => setNumData(e.target.value)} placeholder="Enter Contact Number" />
                 <input type="password" id="pass" value={passData} onChange={(e) => setPassData(e.target.value)} placeholder="Choose a strong password" />
                 <input type="submit" value="SIGNUP" />
-                <Link to={"/login"}><button>Login</button></Link>
+                <Link to={"/login"}><p style={{ fontWeight: "600", textAlign: "center" }}>Already a user ? <span style={{ fontWeight: "600", textDecoration: "underline" }}>Login here</span></p></Link>
             </form>
 }
 

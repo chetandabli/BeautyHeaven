@@ -21,8 +21,8 @@
 .loginForm>div>input{
    display: block;
    padding: 5px;
-   padding-left: 80px;
-   padding-right: 80px;
+   padding-left: 25%;
+   padding-right: 25%;
    background-color: #ad9551;
    color: white;
    border: none;
@@ -34,3 +34,54 @@
    margin-top: 40px;
    margin-bottom: 40px;
 }
+
+/* media queries for responsiveness */
+
+@media screen and (max-width: 768px) {
+   .loginForm>input{
+      padding: 5px;
+   }
+   .loginForm p,
+   .loginForm h4{
+      margin: 8px;
+   }
+   .loginForm>div>input{
+      width: 95%;
+      margin: auto;
+      margin-top: 15px;
+   }
+   .loginForm>div{
+      display: block;
+      width: 80%;
+      margin: auto;
+   }
+   .loginForm>div p{
+      text-align: center;
+   }
+ }
+ 
+@media screen and (max-width: 500px) {
+   .loginForm>input{
+      padding: 5px;
+   }
+   .loginForm p,
+   .loginForm h4{
+      margin: 8px;
+   }
+   .loginForm>div>input{
+      width: 95%;  
+      margin: auto;
+      margin-top: 15px;
+   }
+   .loginForm p:nth-child(5){
+      display: none;
+   }
+   .loginForm>div{
+      display: block;
+      width: 80%;
+      margin: auto;
+   }
+   .loginForm>div p{
+     text-align: center;
+   }
+ }

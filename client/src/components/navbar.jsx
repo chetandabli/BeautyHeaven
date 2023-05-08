@@ -3,12 +3,15 @@ import { useState, useEffect } from "react";
 import Logo from "../assets/navbar_logo.png";
 import "./Footer.module.css"
 import CSS from "./Navbar.module.css"
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const baseURL = "http://localhost:5000";
   const location = useLocation();
   const [username, setUsername] = useState(
     localStorage.getItem("username") || false
   );
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -55,8 +58,35 @@ function Navbar() {
               <li>
                 <button
                   onClick={() => {
-                    localStorage.removeItem("username");
-                    setUsername(false);
+                    const loginCheck = localStorage.getItem("token");
+                    if(loginCheck){
+                      fetch(`${baseURL}/users/logout`,{
+                        method : "GET",
+                        headers : {
+                          authorization : loginCheck
+                        }
+                      })
+                      .then((res) => {
+                        return res.json();
+                      })
+                      .then((data) => {
+                        if(data){
+                          localStorage.removeItem("username");
+                          setUsername(false);
+                          alert("Logout Successfull");
+                          navigate("/");
+                        }
+                        else{
+                          alert("Something went wrong");
+                        }
+                      })
+                      .catch((err) => {
+                        console.log(err.message);
+                      })
+                    }
+                    else{
+                      alert("Please login first");
+                    }
                   }}
                   className={CSS["login-btn"]}
                 >

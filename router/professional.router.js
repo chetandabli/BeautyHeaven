@@ -28,6 +28,6 @@ professionalRouter.post("/createBeautySlots", beautySlotsOpen);
 
 
 //BOOKED SLOTS OF USERS
-professionalRouter.get("bookedSlots", bookedSlots)
+professionalRouter.get("/bookedSlots", bookedSlots)
 
 module.exports = { professionalRouter };

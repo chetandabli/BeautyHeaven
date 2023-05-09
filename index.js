@@ -11,7 +11,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use("/users",userRouter)
-app.use("/professionals",professionalRouter)
+app.use("/professions",professionalRouter)
 app.use('/admin', adminRouter)
 
 //connected to server

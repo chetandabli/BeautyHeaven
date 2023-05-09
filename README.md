@@ -77,11 +77,11 @@ Overall, a beauty booking system website provides a convenient and efficient way
     - node index.js
     
 ## Environment Variables
-    - To run this project, you will need to add the following environment variables to your .env file
+ To run this project, you will need to add the following environment variables to your .env file
 
- - Secret: secret key for jwt token
- - sqlpass: password for MySql Database connection
- - sqlusername: Username of MySql DB connection
+      - Secret: secret key for jwt token
+      - sqlpass: password for MySql Database connection
+      - sqlusername: Username of MySql DB connection
 
 ## Contributors
 -[Shiva Saraswat](https://github.com/shivam5665)

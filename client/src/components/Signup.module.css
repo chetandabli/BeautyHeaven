@@ -1,8 +1,9 @@
 .signupForm{
-    border: 1px solid black;
     width:35%;
     margin: auto;
     padding:25px;
+    margin-top: 115px;
+    background-color: #eae3db;
 }
 .signupForm>div{
     display: flex;
@@ -30,10 +31,11 @@
     margin-top: 20px;
     margin-bottom: 20px;
     width: 95%;
+    border: none;
 }
-.signupForm>input:nth-child(8){
+.signupForm>input:nth-child(7){
     display: block;
-    background-color: black;
+    background-color: #ad9551;
     color: white;
 }
 .signupForm p{
@@ -43,3 +45,33 @@
     margin-top: 40px;
     margin-bottom: 40px;
 }
+
+/* media queries for responsiveness */
+
+@media screen and (max-width: 768px) {
+    .signupForm>div{
+        display: block;
+    }
+    .signupForm>input{
+        padding: 5px;
+    }
+    .signupForm p,
+    .signupForm h4{
+        padding: 0px;
+        margin: 8px;
+    }
+  }
+  
+@media screen and (max-width: 480px) {
+    .signupForm>div{
+        display: block;
+    }
+    .signupForm>input{
+        padding: 5px;
+    }
+    .signupForm p,
+    .signupForm h4{
+        padding: 0px;
+        margin: 7px;
+    }
+  }

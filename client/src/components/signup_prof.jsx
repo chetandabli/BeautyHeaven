@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-function Signup () {
+function SignupProfessional () {
     const baseURL = "http://localhost:5000";
     const [nameData,setNameData] = useState("");
     const [emailData, setEmailData] = useState("");
@@ -11,17 +11,19 @@ function Signup () {
     const [passData,setPassData] = useState("");
     const navigate = useNavigate();
 
+    console.log("fuck")
+
     function formSubmit(e) {
         e.preventDefault();
         const userData = {
-            username:nameData,
+            professionalName:nameData,
             email:emailData,
             phoneNumber:numData,
             password:passData
          }
          const res = formCheck(userData);
          if(res){
-            fetch(`${baseURL}/users/register`,{
+            fetch(`${baseURL}/professions/register`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -35,7 +37,7 @@ function Signup () {
                  console.log(data);
                  if(data.message === "registration successfull"){
                     alert(data.message);
-                    navigate("/login");
+                    navigate("/professional/login");
                  }
                  else{
                     alert("Something went wrong, Registration Failed");
@@ -52,17 +54,19 @@ function Signup () {
 
     function formCheck(obj) {
         let check = false;
-        if(obj.username != "" && obj.email != "" && obj.phoneNumber != "" && obj.password != ""){
+        if(obj.professionalName != "" && obj.email != "" && obj.phoneNumber != "" && obj.password != ""){
         check = true;
     }
     return check;
     }
 
-    return <form id="signup" onSubmit={(e) => {
+    return <>
+    <div style={{padding: "20px"}}></div>
+        <form id="signup" onSubmit={(e) => {
         formSubmit(e);
     }} className={styles.signupForm}>
                 <div>
-                    <h4>SIGNUP</h4>
+                    <h4>SIGNUP AS PROFESSIONAL</h4>
                     <p>**All fields are required</p>
                 </div>
                 <p>Please sign-up below to create an account</p>
@@ -71,8 +75,10 @@ function Signup () {
                 <input type="number" id="num" value={numData} onChange={(e) => setNumData(e.target.value)} placeholder="Enter Contact Number" />
                 <input type="password" id="pass" value={passData} onChange={(e) => setPassData(e.target.value)} placeholder="Choose a strong password" />
                 <input type="submit" value="SIGNUP" />
-                <Link to={"/login"}><p style={{ fontWeight: "600", textAlign: "center" }}>Already a user ? <span style={{ fontWeight: "600", textDecoration: "underline" }}>Login here</span></p></Link>
+                <Link to={"/professional/login"}><p style={{ fontWeight: "600", textAlign: "center" }}>Already a user ? <span style={{ fontWeight: "600", textDecoration: "underline" }}>Login here</span></p></Link>
             </form>
+            <div style={{padding: "50px"}}></div>
+    </>
 }
 
-export default Signup;
+export default SignupProfessional;

@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-
+const { seq } = require("../config/db");
 
 
 const BeautySlot = seq.define("beautySlots", {

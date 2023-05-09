@@ -22,10 +22,10 @@ adminRouter.use(AuthenticateAdmin);
 adminRouter.get('/professionals',getProfessionalData);
 
 //All Appointments Data
-adminRouter.get('/appointments',getAppointments);
+adminRouter.get('/appointments',getAppointmentsData);
 
 //Update Professionals Data
-adminRouter.patch('/updateProfessional',updateProfessional);
+adminRouter.patch('/updateProfessional',UpdateProfessional);
 
 //Remove Professional
 adminRouter.delete('/removeProfessional',RemoveProfessional);

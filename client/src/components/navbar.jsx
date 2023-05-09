@@ -9,13 +9,16 @@ function Navbar() {
   const baseURL = "http://localhost:5000";
   const location = useLocation();
   const [username, setUsername] = useState(
-    localStorage.getItem("username") || localStorage.getItem("usernamePro") || false
+    localStorage.getItem("username") || false
+  );
+  const [usernamePro, setUsernamePro] = useState(
+    localStorage.getItem("usernamePro") || false
   );
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleStorageChange = () => {
-      setUsername(localStorage.getItem("username") || localStorage.getItem("usernamePro"));
+      setUsername(localStorage.getItem("username"));
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -24,6 +27,17 @@ function Navbar() {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+  useEffect(() => {
+    const handleStorageChangePro = () => {
+      setUsernamePro(localStorage.getItem("usernamePro"));
+    };
+
+    window.addEventListener("storage", handleStorageChangePro);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChangePro);
+    };
+  }, [usernamePro]);
 
   const isHome = location.pathname === "/";
   const isServices = location.pathname === "/services";
@@ -50,11 +64,11 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/professional" className={isProfessional? CSS["active-link"] : ""}>
-              Join us
+            <Link to="/professional/dashboard" className={isProfessional? CSS["active-link"] : ""}>
+              {usernamePro? usernamePro : "Join us"}
             </Link>
           </li>
-          {username ? (
+          {username? (
             <>
               <li>
                 <Link to="/dashboard" className={isDashboard? CSS["active-link"] : ""}>
@@ -62,6 +76,59 @@ function Navbar() {
                 </Link>
               </li>
               <li>
+                <button
+                  onClick={() => {
+                    const loginCheck = localStorage.getItem("token");
+                    if(loginCheck){
+                      fetch(`${baseURL}/users/logout`,{
+                        method : "GET",
+                        headers : {
+                          authorization : loginCheck
+                        }
+                      })
+                      .then((res) => {
+                        console.log(res)
+                        return res;
+                      })
+                      .then((data) => {
+                        if(data){
+                          localStorage.removeItem("username");
+                          localStorage.removeItem("token");
+                          setUsername(false);
+                          alert("Logout Successfull");
+                          navigate("/");
+                        }
+                        else{
+                          alert("Something went wrong");
+                        }
+                      })
+                      .catch((err) => {
+                        console.log(err.message);
+                      })
+                    }
+                    else{
+                      if(localStorage.getItem("usernamePro") || localStorage.getItem("tokenPro")){
+                        localStorage.removeItem("usernamePro")
+                        localStorage.removeItem("tokenPro")
+                        navigate("/");
+                      }else{
+                        alert("Please login first");
+                      }
+                    }
+                  }}
+                  className={CSS["login-btn"]}
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : usernamePro? "" : <li>
+              <Link to="/login">
+                <button className={CSS["login-btn"]}>Login</button>
+              </Link>
+            </li>}
+          {usernamePro? (
+            <li>
                 <button
                   onClick={() => {
                     const loginCheck = localStorage.getItem("token");
@@ -91,22 +158,27 @@ function Navbar() {
                       })
                     }
                     else{
-                      alert("Please login first");
+                      if(localStorage.getItem("usernamePro") || localStorage.getItem("tokenPro")){
+                        localStorage.removeItem("usernamePro")
+                        localStorage.removeItem("tokenPro")
+                        navigate("/");
+                      }else{
+                        localStorage.removeItem("usernamePro")
+                        localStorage.removeItem("tokenPro")
+                        navigate("/");
+                      }
                     }
-                  }}
+                    localStorage.removeItem("usernamePro")
+                    localStorage.removeItem("tokenPro")
+                    navigate("/")
+                  }
+                  }
                   className={CSS["login-btn"]}
                 >
                   Logout
                 </button>
               </li>
-            </>
-          ) : (
-            <li>
-              <Link to="/login">
-                <button className={CSS["login-btn"]}>Login</button>
-              </Link>
-            </li>
-          )}
+          ) : ""}
         </ul>
       </div>
     </div>

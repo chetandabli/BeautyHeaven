@@ -53,7 +53,7 @@ function LoginPro () {
                 localStorage.removeItem("username")
                 localStorage.removeItem("token")
                 alert("Login Success");
-                navigate("/professional");
+                navigate("/");
             }
             else{
                 console.log(data)

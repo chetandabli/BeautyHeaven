@@ -9,13 +9,13 @@ function Navbar() {
   const baseURL = "http://localhost:5000";
   const location = useLocation();
   const [username, setUsername] = useState(
-    localStorage.getItem("username") || false
+    localStorage.getItem("username") || localStorage.getItem("usernamePro") || false
   );
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleStorageChange = () => {
-      setUsername(localStorage.getItem("username"));
+      setUsername(localStorage.getItem("username") || localStorage.getItem("usernamePro"));
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -28,6 +28,7 @@ function Navbar() {
   const isHome = location.pathname === "/";
   const isServices = location.pathname === "/services";
   const isDashboard = location.pathname === "/dashboard";
+  const isProfessional  = location.pathname === "/professional";
 
   return (
     <div className={CSS["navbar-container"]}>
@@ -46,6 +47,11 @@ function Navbar() {
           <li>
             <Link to="/services" className={isServices? CSS["active-link"] : ""}>
               Services
+            </Link>
+          </li>
+          <li>
+            <Link to="/professional" className={isProfessional? CSS["active-link"] : ""}>
+              Join us
             </Link>
           </li>
           {username ? (

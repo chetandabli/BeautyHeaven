@@ -92,6 +92,7 @@ let beautySlotsOpen = async (req, res)=>{
 let bookedSlots = async (req, res)=>{
   try {
       let token = req.headers.authorization
+      console.log(token)
       let decoded = jwt.verify(token, process.env.secret)
       let {email, professionalName, iat, exp} = decoded
       let beautyslot = await BeautySlot.findAll({where:{

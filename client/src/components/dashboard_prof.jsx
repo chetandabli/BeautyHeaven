@@ -12,7 +12,10 @@ function Dashboard_prof() {
     //   }, [isLogged, navigate]);
     
   return (
-    <div>Dashboard_prof</div>
+    <>
+        <div style={{padding: "40px"}}></div>
+        <div>hey</div>
+    </>
   )
 }
 

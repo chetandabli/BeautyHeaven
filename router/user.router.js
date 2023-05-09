@@ -26,7 +26,7 @@ userRouter.post("/register", userRegister);
 // LOGIN BY USERS
 userRouter.post("/login", userLogin);
 
-
+//LOGOUT BY USERS
 userRouter.get("/logout", async(req,res) => {
   let token = req.headers.authorization;
   try{

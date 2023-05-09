@@ -76,9 +76,9 @@ To run this project, you will need to add the following environment variables to
 - Get booked appointments list (Method: GET): /users/bookingSlots/:id
 
 ## Contributors
-- @shivam5665
-- @chetandabli
-- @RAUSHANSHARMA74
-- @Nihar11789
-- @gauravsahuu
+- [Shiva Saraswat](https://github.com/shivam5665)
+- [Chetan Ram](https://github.com/chetandabli)
+- [Raushan Sharma](https://github.com/RAUSHANSHARMA74)
+- [Nihar Ranjan Patra](https://github.com/Nihar11789)
+- [Gaurav Sahu](https://github.com/gauravsahuu)
 

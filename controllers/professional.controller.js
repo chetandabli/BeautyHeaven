@@ -150,7 +150,7 @@ let checkRequestUsers = async (req, res)=>{
         });
         res.status(200).json({
           isError: false,
-          "message": `Get All slots Booked By Users`,
+          "message": `Confirmed`,
           beautyslot,
           progress
       })
@@ -172,7 +172,7 @@ let checkRequestUsers = async (req, res)=>{
         });
         res.status(200).json({
           isError: false,
-          "message": `Get All slots Booked By Users`,
+          "message": `Rejected`,
           beautyslot,
       })
       }   

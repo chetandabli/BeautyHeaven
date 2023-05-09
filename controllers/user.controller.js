@@ -158,7 +158,6 @@ let particularSlots = async (req, res) => {
     let { username, email } = decoded;
     let beautyslot = await BeautySlot.findAll({
       where: {
-        status: true,
         userEmail : email
       },
     });

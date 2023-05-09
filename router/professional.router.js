@@ -30,4 +30,7 @@ professionalRouter.post("/createBeautySlots", beautySlotsOpen);
 //BOOKED SLOTS OF USERS
 professionalRouter.get("/bookedSlots", bookedSlots)
 
+//UPDATE BOOKED SLOTS OF USERS
+professionalRouter.patch("/updateslot/:id/:stutas", checkRequestUsers)
+
 module.exports = { professionalRouter };

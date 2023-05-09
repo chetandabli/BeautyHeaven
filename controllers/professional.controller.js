@@ -96,7 +96,6 @@ let bookedSlots = async (req, res)=>{
       let decoded = jwt.verify(token, process.env.secret)
       let {email, professionalName, iat, exp} = decoded
       let beautyslot = await BeautySlot.findAll({where:{
-        status : true,
         professionalEmail : email
       }})
       res.status(200).json({
@@ -117,6 +116,8 @@ let checkRequestUsers = async (req, res)=>{
       let decoded = jwt.verify(token, process.env.secret);
       let beautyId = req.params.id;
       let progressStatus = req.params.status
+      console.log(req.params)
+      console.log(progressStatus)
       let {
         id,
         beautyType,
@@ -132,6 +133,7 @@ let checkRequestUsers = async (req, res)=>{
         createdAt,
         updatedAt,
       } = await BeautySlot.findOne({ where: { id: beautyId } });
+      
       if(progressStatus==="true"){
         let beautyslot = await BeautySlot.upsert({
           id,
@@ -150,7 +152,7 @@ let checkRequestUsers = async (req, res)=>{
         });
         res.status(200).json({
           isError: false,
-          "message": `Get All slots Booked By Users`,
+          "message": `Confirmed`,
           beautyslot,
           progress
       })
@@ -172,7 +174,7 @@ let checkRequestUsers = async (req, res)=>{
         });
         res.status(200).json({
           isError: false,
-          "message": `Get All slots Booked By Users`,
+          "message": `Rejected`,
           beautyslot,
       })
       }   

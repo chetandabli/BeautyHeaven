@@ -35,6 +35,8 @@ function Login () {
                 }
                 localStorage.setItem("username",userDetails.username);
                 localStorage.setItem("token",userDetails.token);
+                localStorage.removeItem("usernamePro")
+                localStorage.removeItem("tokenPro")
                 alert("Login Success");
                 navigate("/services");
             }

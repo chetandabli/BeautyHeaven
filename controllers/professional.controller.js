@@ -75,6 +75,7 @@ let beautySlotsOpen = async (req, res)=>{
   try {
       let token = req.headers.authorization
       let decoded = jwt.verify(token, process.env.secret)
+      console.log(req.body)
       let {beautyType, bookingTime} = req.body
       let beautyslot = await BeautySlot.create({beautyType, bookingTime, "professionalEmail":decoded.email, "professionalName":decoded.professionalName})
       res.status(200).json({

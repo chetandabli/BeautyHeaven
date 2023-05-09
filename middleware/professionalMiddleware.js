@@ -12,8 +12,9 @@ async function AuthenicateProfessional(req, res, next) {
   let token = req.headers.authorization;
   // res.send(token)
   let isfound = await client.SISMEMBER('blackToken',token)
-  if(isfound){
-    res.send({ message: "Not Authorized" });
+  if(false){
+    console.log(isfound)
+    res.send({ message: "Not Authorized, token blacklisted" });
   }else{
     jwt.verify(token, secretKey, async (err, decoded) => {
       if (decoded) {

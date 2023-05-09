@@ -25,9 +25,9 @@ function BeautySlotsForm() {
         data = await data.json();
         console.log(data);
 
-        // if (data.message === "Not Authorized") {
-        //   navigate("/professional/login");
-        // }
+        if (data.message === "Not Authorized") {
+          navigate("/professional/login");
+        }
         setSlotData(data.beautyslot);
       } catch (error) {
         console.log(error);
@@ -59,6 +59,7 @@ function BeautySlotsForm() {
   };
 
   async function updateStatus(id, x) {
+    console.log(x)
     try {
       const token = localStorage.getItem("tokenPro");
       let res = await fetch(`${baseURL}/professions/updateslot/${id}/${x}`, {
@@ -66,7 +67,7 @@ function BeautySlotsForm() {
         headers: {
           "Content-Type": "application/json",
           authorization: token,
-        },
+        }
       });
       res = await res.json();
       if(res.message === "Confirmed" || res.message === "Rejected"){
@@ -151,7 +152,7 @@ function BeautySlotsForm() {
               </p>
               <p>
                 status:{" "}
-                {el.progress ? "Confirmed" : el.status ? "pending" : "Rejected"}
+                {el.progress ? "Confirmed" : el.status ? "pending" : (!el.progress && !el.status && !el.userName)? "Not Booked" : "Rejected"}
               </p>
               <hr style={{ color: "rgb(237, 237, 237)" }}></hr>
               <button

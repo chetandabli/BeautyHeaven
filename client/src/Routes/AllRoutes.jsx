@@ -10,6 +10,7 @@ import ProfessionalPage from "../pages/professional";
 import ProfessionalSingupPage from "../pages/signupprof";
 import ProfessionalLoginPage from "../pages/loginpro";
 import ProfessionalDashboardPage from "../pages/dashboard_prof";
+import AdminDash from "../pages/admin_dash";
 
 export default function AllRoutes() {
   return (
@@ -25,6 +26,7 @@ export default function AllRoutes() {
           <Route path="dashboard" element={<ProfessionalDashboardPage />}></Route>
         </Route>
         <Route path="/dashboard" element={<DashboardPage />}></Route>
+        <Route path="/adminDash" element={<AdminDash />}></Route>
         <Route path="*" element={<InvalidePage />} />
       </Routes>
     </div>

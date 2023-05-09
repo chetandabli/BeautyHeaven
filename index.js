@@ -1,6 +1,6 @@
 const express  = require("express")
 const {seq,client} = require("./config/db")
-const {adminRouter} = require('/router/admin.router')
+const {adminRouter} = require('./router/admin.router')
 const {professionalRouter} = require("./router/professional.router")
 const {userRouter} = require("./router/user.router")
 const cors = require('cors')

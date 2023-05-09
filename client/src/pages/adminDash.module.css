@@ -1,0 +1,20 @@
+.head{
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 98%;
+    background-color: #AD9551;
+    color: Black;
+}
+.tableDiv table{
+    width: 98%;
+    margin: auto;
+}
+.tableDiv th,
+.tableDiv td{
+    background-color: #EAE3DB;
+    text-align: center;
+}
+.tableDiv h3{
+    margin-left: 20px;
+}

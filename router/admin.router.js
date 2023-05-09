@@ -5,8 +5,8 @@ const {adminRegister,
         getProfessionalData,
         getAppointmentsData,
         UpdateProfessional,
-        RemoveProfessional} = require('../constrollers/admin.contoller')
-const {AuthenticateAdmin} = require("../middleware/adminMiddleware")
+        RemoveProfessional} = require('../controllers/admin.controller')
+const {AuthenticateAdmin} = require("../middleware/aminMiddleware")
 const adminRouter = express.Router();
 
 //Register Admin
@@ -16,7 +16,7 @@ adminRouter.post('/register',adminRegister);
 adminRouter.post('/login',adminLogin);
 
 //Authenticate Admin
-adminRouter.use(AuthenticateAdmin);
+// adminRouter.use(AuthenticateAdmin);
 
 //All Professionals Data
 adminRouter.get('/professionals',getProfessionalData);

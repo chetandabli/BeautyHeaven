@@ -4,8 +4,7 @@
   "description": "��#\u0000 \u0000v\u0000e\u0000s\u0000t\u0000a\u0000l\u0000-\u0000l\u0000a\u0000b\u0000o\u0000r\u0000e\u0000r\u0000-\u00003\u00008\u00009\u00001\u0000-\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "start:react": "parcel serve client/index.html --open --dist-dir client/build",
-    "build": "parcel build client/index.html --dist-dir client/build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

@@ -12,16 +12,18 @@ const seq = new Sequelize("beauty_heaven", process.env.sqlusername, process.env.
 })
 
 // const redis = require('redis');
-const {createClient } =  require('redis');
+const {createClient} = require('redis');
+require("dotenv").config();
 
 const client = createClient({
-    password: '32zHowpaBGmoS9RDyVlIgdfVVdRrMSh4',
+    password: process.env.redisClientPassword,
     socket: {
-        host: 'redis-11887.c81.us-east-1-2.ec2.cloud.redislabs.com',
-        port: 11887
+        host: process.env.redisClientHostlink,
+        port: process.env.redisClientHost
     }
 });
-client.on("error", (err) => console.log("Redis Client Error", err));
+
+client.on('error', err => console.log('Redis Client Error', err));
 
 try {
     client.connect();

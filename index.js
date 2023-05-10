@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get("/", (req, res)=>{
-    res.sendFile(path.join('index.html'))
+    res.sendFile('index.html')
 })
 
 app.use("/users",userRouter)
@@ -22,7 +22,7 @@ app.use("/professions",professionalRouter)
 app.use('/admin', adminRouter)
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join('index.html'));
+    res.sendFile('index.html');
   });
 
 //connected to server

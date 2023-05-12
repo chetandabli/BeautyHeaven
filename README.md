@@ -1,8 +1,8 @@
 # Beauty Heaven - A Beauty Booking System
 
 > Project Code : vestal-laborer-3891 <br/>
-> frontend Deployed link :      <br/>
-> backend deployed link :      <br/>
+> frontend Deployed link : https://beauty-heaven.onrender.com      <br/>
+> backend deployed link : https://beauty-heaven.onrender.com      <br/>
 
 Beauty Heaven (Beauty booking system) website is an online platform designed to connect beauty professionals with clients looking to book beauty-related sessions. The website offers a user-friendly interface that allows clients to search for services and book appointments with beauty professionals in their area.
 Upon visiting the website, users can create an account and browse through a wide range of beauty services offered by professionals, such as haircuts, facials, manicures, pedicures, makeup application, and more. Users can then select their preferred service, date, time, and location.

@@ -8,7 +8,7 @@ function Dashboard() {
 
   useEffect(() => {
     async function fetchSlotData() {
-        let data = await fetch("http://localhost:5000/users/particularslots", {
+        let data = await fetch("https://beauty-heaven.onrender.com/users/particularslots", {
           method: "GET",
           headers: {
             authorization: localStorage.getItem("token"),

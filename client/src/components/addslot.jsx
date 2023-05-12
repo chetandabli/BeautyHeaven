@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import CSS from "./Addslot.module.css";
 
 function BeautySlotsForm() {
-  const baseURL = "http://localhost:5000";
+  const baseURL = "https://beauty-heaven.onrender.com";
   const [beautyType, setBeautyType] = useState("");
   const [bookingTime, setBookingTime] = useState("");
   const [slotData, setSlotData] = useState([]);
@@ -14,7 +14,7 @@ function BeautySlotsForm() {
     async function fetchSlotData() {
       try {
         let data = await fetch(
-          "http://localhost:5000/professions/bookedSlots",
+          "https://beauty-heaven.onrender.com/professions/bookedSlots",
           {
             method: "GET",
             headers: {

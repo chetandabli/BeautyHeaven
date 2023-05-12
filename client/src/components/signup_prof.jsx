@@ -4,7 +4,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 function SignupProfessional () {
-    const baseURL = "http://localhost:5000";
+    const baseURL = "https://beauty-heaven.onrender.com";
     const [nameData,setNameData] = useState("");
     const [emailData, setEmailData] = useState("");
     const [numData,setNumData] = useState("");

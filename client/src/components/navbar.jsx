@@ -6,7 +6,7 @@ import CSS from "./Navbar.module.css"
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
-  const baseURL = "http://localhost:5000";
+  const baseURL = "https://beauty-heaven.onrender.com";
   const location = useLocation();
   const [username, setUsername] = useState(
     localStorage.getItem("username") || false

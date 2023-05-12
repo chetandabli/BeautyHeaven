@@ -9,7 +9,7 @@ function Services() {
   let navigate = useNavigate();
   useEffect(() => {
     async function fetchSlotData() {
-      let data = await fetch("http://localhost:5000/users/availableSlots", {
+      let data = await fetch("https://beauty-heaven.onrender.com/users/availableSlots", {
         method: "GET",
         headers: {
           authorization: localStorage.getItem("token"),
@@ -28,7 +28,7 @@ function Services() {
   }, [i]);
 
   const bookSlot = async (id) => {
-    let x = await fetch(`http://localhost:5000/users/bookingSlots/${id}`, {
+    let x = await fetch(`https://beauty-heaven.onrender.com/users/bookingSlots/${id}`, {
       method: "PUT",
       headers: {
         authorization: localStorage.getItem("token"),

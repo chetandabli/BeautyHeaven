@@ -2,7 +2,7 @@ import {useState,useEffect} from "react";
 
 
 function AdminAppointment () {
-    const baseURL = "http://localhost:5000";
+    const baseURL = "https://beauty-heaven.onrender.com";
     const [appointData,setAppointData] = useState(null);
 
     useEffect(() => {

@@ -2,7 +2,7 @@ import {useState,useEffect} from "react";
 
 
 function AdminProf () {
-    const baseURL = "http://localhost:5000";
+    const baseURL = "https://beauty-heaven.onrender.com";
     const [profData,setProfData] = useState(null);
 
     useEffect(() => {

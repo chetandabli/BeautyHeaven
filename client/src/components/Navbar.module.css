@@ -63,34 +63,49 @@
 /* media queries for responsiveness */
 @media screen and (max-width: 768px) {
   .navbar-container {
-    height: 50px;
+    height: 100px;
     padding: 0;
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
+  }
+
+  .logo_div{
+    width: 100%;
     display: flex;
-    justify-content: center
+    justify-content: center;
+    margin: auto;
   }
   
   .logo {
     margin-left: 10px;
+    height: 50px;
   }
   
   .nav-links {
-    display: none;
-    position: absolute;
-    top: 60px;
+    top: 50px;
     left: 0;
     right: 0;
     background-color: #EAE3DB;
     padding: 10px;
   }
+  .nav-links>ul>:first-child {
+    display: none;
+  }
   
-  .nav-links ul {
-    flex-direction: column;
+  .nav-links>ul {
+    flex-direction: flex;
     align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
   }
   
   .nav-links li {
     margin: 10px 0;
+    flex-direction: flex;
+    align-items: center;
+    justify-content: space-evenly;
   }
   
   .nav-links a {

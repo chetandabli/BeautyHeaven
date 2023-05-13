@@ -46,7 +46,7 @@ function Navbar() {
 
   return (
     <div className={CSS["navbar-container"]}>
-      <div>
+      <div className={CSS.logo_div}>
         <Link to="/">
           <img src={Logo} alt="beauty heaven" className={CSS.logo} />
         </Link>

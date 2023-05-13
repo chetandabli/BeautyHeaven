@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const {createClient} = require('redis');
 require("dotenv").config()
 
 const seq = new Sequelize("beauty_heaven", process.env.sqlusername, process.env.sqlPass, {
@@ -11,24 +12,18 @@ const seq = new Sequelize("beauty_heaven", process.env.sqlusername, process.env.
     }
 })
 
-// const redis = require('redis');
-const {createClient} = require('redis');
-require("dotenv").config();
-
 const client = createClient({
     password: process.env.redisClientPassword,
-    socket: {
-        host: process.env.redisClientHostlink,
-        port: process.env.redisClientHost
-    }
+    host: process.env.redisClientHostlink,
+    port: process.env.redisClientHost
 });
 
-client.on('error', err => console.log('Redis Client Error', err));
+client.on('ready', () => {
+    console.log('Redis client connected');
+});
 
-try {
-    client.connect();
-} catch (error) {
-    console.log(error)
-}
+client.on('error', err => {
+    console.log('Redis client error', err);
+});
 
 module.exports = {seq,client}

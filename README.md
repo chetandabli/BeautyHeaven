@@ -1,3 +1,4 @@
+
 # Beauty Heaven - A Beauty Booking System
 
 > Project Code : vestal-laborer-3891 <br/>
@@ -9,6 +10,8 @@ Upon visiting the website, users can create an account and browse through a wide
 Beauty professionals can also create an account on the website and set up their availability by opening slots. They can specify the services they offer, their rates, and their preferred work schedule. They can then receive booking requests from clients and confirm or decline them based on their availability.
 Overall, a beauty booking system website provides a convenient and efficient way for clients to find and book beauty services while also helping beauty professionals manage their appointments and grow their businesses.
 
+## Flow 
+![BEAUTY HEAVEN](https://github.com/chetandabli/vestal-laborer-3891/assets/107503237/5b684d97-204d-495a-80fb-e8eaf78272f3)
 ## Features
 
  - Authentication: The project includes JWT-based authentication to secure user data.

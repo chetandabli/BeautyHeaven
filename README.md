@@ -70,9 +70,9 @@ Overall, a beauty booking system website provides a convenient and efficient way
     
 ## Run Locally
  ### Clone the project
-     -https://github.com/chetandabli/vestal-laborer-3891.git    
+     -https://github.com/chetandabli/BeautyHeaven.git    
 ### Go to the project directory
-    - cd busy-motion-6100
+    - cd BeautyHeaven
     
 ### Install dependencies
 
